@@ -362,6 +362,8 @@ def mainGame(movementInfo):
                 paused = not paused  # Rule change 2 by NKC: Game is paused as pause = True (not False)
             if event.type == KEYDOWN and event.key == K_r:  # Rule change 2 by NKC: If player presses down on the key "r" to indicate reusme game
                 paused = False  # Rule change 2 by NKC: Game is not paused
+            if event.type == KEYDOWN and (event.key == K_SPACE or event.key == K_UP):
+                action = 1
             if event.type == QUIT or (event.type == KEYDOWN and event.key == K_ESCAPE):
                 # FIX: use text mode with newline='' for csv in Python 3
                 with open(statefile, 'w', newline='') as wf:
