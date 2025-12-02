@@ -177,20 +177,22 @@ def showWelcomeAnimation():
 
     # ---------- FIX 2: run a real loop here and wait for SPACE/UP to start ----------
     while True:
-        for event in pygame.event.get():
-            if event.type == QUIT:
-                pygame.quit()
-                sys.exit()
-            if event.type == KEYDOWN and (event.key == K_SPACE or event.key == K_UP):
-                return {
-                    'playery': playery + playerShmVals['val'],
-                    'basex': basex,
-                    'playerIndexGen': playerIndexGen,
-                    'playerIndex': playerIndex
-                }
-            if event.type == KEYDOWN and event.key == K_ESCAPE:
-                pygame.quit()
-                sys.exit()
+       for event in pygame.event.get():
+    if event.type == QUIT or (event.type == KEYDOWN and event.key == K_ESCAPE):
+        # save and exit
+        with open(statefile,'wb') as wf:
+            w=csv.writer(wf)
+            w.writerows(Qmatrix.items())
+        with open("score.csv",'wb') as wf:
+            w=csv.writer(wf)
+            w.writerow((maxscore,wholecount))
+        pygame.quit()
+        sys.exit()
+
+    if event.type == KEYDOWN and (event.key == K_SPACE or event.key == K_UP):
+        playerVelY = playerFlapAcc
+        playerFlapped = True
+        action = 1      
 
         if (loopIter + 1) % 5 == 0:
             playerIndex = next(playerIndexGen)
