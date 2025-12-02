@@ -296,6 +296,7 @@ def showWelcomeAnimation():
 # ARLEEN'S SECTION
 def mainGame(movementInfo):
     global wholecount, maxscore, epsilon, paused  # Rule change 2 by NKC: Ensures the local variable is accesible within the function.
+    epslion = 0.1
 
     loopIter = 0  # FIX: ensure loopIter exists independently from score
     score = 0
